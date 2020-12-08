@@ -1,6 +1,7 @@
 import pytest
 import subprocess
 import os
+import sys
 import shutil
 from receptorctl import ReceptorControl
 import time
@@ -48,8 +49,8 @@ generate_cert_with_ca("server", caKeyPath, caCrtPath, "localhost")
 @pytest.fixture(scope="class")
 def receptor_mesh(request):
 
-    node1 = subprocess.Popen(["receptor", "-c", "tests/mesh-definitions/mesh1/node1.yaml"])
-    node2 = subprocess.Popen(["receptor", "-c", "tests/mesh-definitions/mesh1/node2.yaml"])
+    node1 = subprocess.Popen(["receptor", "-c", "receptorctl/tests/mesh-definitions/mesh1/node1.yaml"])
+    node2 = subprocess.Popen(["receptor", "-c", "receptorctl/tests/mesh-definitions/mesh1/node2.yaml"])
 
     time.sleep(0.5)
     socketaddress = "unix://" + os.path.join(tmpDir, "node1.sock")
